@@ -1,0 +1,483 @@
+<?xml version="1.0" ?>
+<robot name="SH_Humanoid_v2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find SH_Humanoid_v2_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find SH_Humanoid_v2_description)/urdf/SH_Humanoid_v2.trans" />
+<xacro:include filename="$(find SH_Humanoid_v2_description)/urdf/SH_Humanoid_v2.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0005715811047883727 -0.02197118000860822 0.06567442749331005" rpy="0 0 0"/>
+    <mass value="300.990715106009"/>
+    <inertia ixx="35.066757" iyy="27.957517" izz="36.410592" ixy="-0.011931" iyz="0.014862" ixz="0.008246"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_shoulder_pitch_link">
+  <inertial>
+    <origin xyz="-0.03921205338777389 0.002186493781622864 1.625741872812725e-05" rpy="0 0 0"/>
+    <mass value="0.9089528736371241"/>
+    <inertia ixx="0.00067" iyy="0.000723" izz="0.00071" ixy="-1.9e-05" iyz="0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.125 -4.2e-05 -1.034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_shoulder_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.125 -4.2e-05 -1.034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_shoulder_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_shoulder_roll_link">
+  <inertial>
+    <origin xyz="-0.00045110571541473465 -0.03192426131702795 -0.07573809251295505" rpy="0 0 0"/>
+    <mass value="1.0768783141689329"/>
+    <inertia ixx="0.002761" iyy="0.002202" izz="0.001206" ixy="-2e-06" iyz="3.9e-05" ixz="-6e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.16749 -0.030557 -1.034003" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_shoulder_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.16749 -0.030557 -1.034003" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_shoulder_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_shoulder_yaw_link">
+  <inertial>
+    <origin xyz="0.00025403650428740265 0.0011236425131196728 -0.03924387940899021" rpy="0 0 0"/>
+    <mass value="0.8813193370158106"/>
+    <inertia ixx="0.000725" iyy="0.000714" izz="0.000653" ixy="-2.5e-05" iyz="3e-06" ixz="3e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.167499 -0.00307 -0.899" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_shoulder_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.167499 -0.00307 -0.899" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_shoulder_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_elbow_link">
+  <inertial>
+    <origin xyz="0.03270760284299826 0.00042485767551609125 -0.049125399602843456" rpy="0 0 0"/>
+    <mass value="0.9357313416294998"/>
+    <inertia ixx="0.001118" iyy="0.001545" izz="0.001012" ixy="-0.0" iyz="-3e-06" ixz="-7e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.197499 -0.003085 -0.8565" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_elbow_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.197499 -0.003085 -0.8565" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_elbow_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wrist_yaw_link">
+  <inertial>
+    <origin xyz="-2.174403649254919e-05 0.0037218325798266524 -0.038249259199443775" rpy="0 0 0"/>
+    <mass value="0.7934201112609479"/>
+    <inertia ixx="0.000574" iyy="0.000668" izz="0.000523" ixy="-0.0" iyz="-1e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.166499 -0.003085 -0.757" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_wrist_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.166499 -0.003085 -0.757" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_wrist_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wrist_pitch_link">
+  <inertial>
+    <origin xyz="-0.0005050743549438186 -0.019352563649039277 -0.06314538914359513" rpy="0 0 0"/>
+    <mass value="1.0608146167499486"/>
+    <inertia ixx="0.001335" iyy="0.001157" izz="0.000756" ixy="-6e-06" iyz="-0.000244" ixz="2e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.166489 -0.033089 -0.714503" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_wrist_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.166489 -0.033089 -0.714503" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_wrist_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wrist_roll_link">
+  <inertial>
+    <origin xyz="0.008968690681985775 1.2630653706963146e-07 -0.025817299040312602" rpy="0 0 0"/>
+    <mass value="0.15567895491073325"/>
+    <inertia ixx="9.2e-05" iyy="0.00011" izz="6.6e-05" ixy="0.0" iyz="-0.0" ixz="3.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.193998 -0.004606 -0.6415" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_wrist_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.193998 -0.004606 -0.6415" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/left_wrist_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_shoulder_pitch_link">
+  <inertial>
+    <origin xyz="0.03910695451828686 0.0009086929298921432 3.758249962015903e-05" rpy="0 0 0"/>
+    <mass value="0.8658442006639364"/>
+    <inertia ixx="0.000637" iyy="0.000713" izz="0.000675" ixy="2.2e-05" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1245 4.2e-05 -1.034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_shoulder_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1245 4.2e-05 -1.034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_shoulder_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_shoulder_roll_link">
+  <inertial>
+    <origin xyz="0.0003975543651664193 -0.03257143947217215 -0.07354024779217905" rpy="0 0 0"/>
+    <mass value="1.0493981568769675"/>
+    <inertia ixx="0.002633" iyy="0.002059" izz="0.001214" ixy="-2e-06" iyz="2.6e-05" ixz="5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.16701 -0.029944 -1.034003" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_shoulder_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.16701 -0.029944 -1.034003" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_shoulder_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_shoulder_yaw_link">
+  <inertial>
+    <origin xyz="-0.0002534328331122715 0.001110306587138502 -0.0392447131098933" rpy="0 0 0"/>
+    <mass value="0.8813137200244127"/>
+    <inertia ixx="0.000725" iyy="0.000714" izz="0.000653" ixy="2.6e-05" iyz="3e-06" ixz="-3e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.167001 -0.002458 -0.8995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_shoulder_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.167001 -0.002458 -0.8995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_shoulder_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_elbow_link">
+  <inertial>
+    <origin xyz="-0.0329118801104748 0.00047902541798581274 -0.04926683021455891" rpy="0 0 0"/>
+    <mass value="0.9307977542690404"/>
+    <inertia ixx="0.001114" iyy="0.001536" izz="0.001005" ixy="-1e-06" iyz="-4e-06" ixz="1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.197001 -0.002452 -0.857" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_elbow_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.197001 -0.002452 -0.857" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_elbow_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wrist_yaw_link">
+  <inertial>
+    <origin xyz="1.021652765215153e-05 0.0037224242238218792 -0.03824941974257112" rpy="0 0 0"/>
+    <mass value="0.7934151746453815"/>
+    <inertia ixx="0.000574" iyy="0.000668" izz="0.000523" ixy="0.0" iyz="-1e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.166001 -0.002472 -0.759" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_wrist_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.166001 -0.002472 -0.759" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_wrist_yaw_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wrist_pitch_link">
+  <inertial>
+    <origin xyz="0.0005207843191259443 -0.019451825987271937 -0.06333559715752568" rpy="0 0 0"/>
+    <mass value="1.0558670819734537"/>
+    <inertia ixx="0.001325" iyy="0.001149" izz="0.000754" ixy="5e-06" iyz="-0.00024" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.166011 -0.032477 -0.716503" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_wrist_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.166011 -0.032477 -0.716503" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_wrist_pitch_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wrist_roll_link">
+  <inertial>
+    <origin xyz="-0.008969188355910374 5.8386592074856705e-06 -0.025817725623692334" rpy="0 0 0"/>
+    <mass value="0.1556816929168741"/>
+    <inertia ixx="9.2e-05" iyy="0.00011" izz="6.6e-05" ixy="0.0" iyz="0.0" ixz="-3.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.193501 -0.003975 -0.6435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_wrist_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.193501 -0.003975 -0.6435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://SH_Humanoid_v2_description/meshes/right_wrist_roll_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="left_shoulder_pitch_joint" type="revolute">
+  <origin xyz="-0.125 4.2e-05 1.034" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_shoulder_pitch_link"/>
+  <axis xyz="1.0 -0.000337 0.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="left_shoulder_roll_joint" type="revolute">
+  <origin xyz="-0.04249 0.030515 3e-06" rpy="0 0 0"/>
+  <parent link="left_shoulder_pitch_link"/>
+  <child link="left_shoulder_roll_link"/>
+  <axis xyz="-0.000337 -1.0 -0.000103"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="left_shoulder_yaw_joint" type="revolute">
+  <origin xyz="-9e-06 -0.027487 -0.135003" rpy="0 0 0"/>
+  <parent link="left_shoulder_roll_link"/>
+  <child link="left_shoulder_yaw_link"/>
+  <axis xyz="-0.0 -0.000103 1.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="left_elbow_joint" type="revolute">
+  <origin xyz="-0.03 1.5e-05 -0.0425" rpy="0 0 0"/>
+  <parent link="left_shoulder_yaw_link"/>
+  <child link="left_elbow_link"/>
+  <axis xyz="-1.0 0.000337 0.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="left_wrist_yaw_joint" type="revolute">
+  <origin xyz="0.031 0.0 -0.0995" rpy="0 0 0"/>
+  <parent link="left_elbow_link"/>
+  <child link="left_wrist_yaw_link"/>
+  <axis xyz="0.0 0.000103 -1.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="left_wrist_pitch_joint" type="revolute">
+  <origin xyz="1e-05 0.030004 -0.042497" rpy="0 0 0"/>
+  <parent link="left_wrist_yaw_link"/>
+  <child link="left_wrist_pitch_link"/>
+  <axis xyz="0.000337 1.0 0.000103"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="left_wrist_roll_joint" type="revolute">
+  <origin xyz="-0.027509 -0.028483 -0.073003" rpy="0 0 0"/>
+  <parent link="left_wrist_pitch_link"/>
+  <child link="left_wrist_roll_link"/>
+  <axis xyz="-1.0 0.000337 -0.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="right_shoulder_pitch_joint" type="revolute">
+  <origin xyz="0.1245 -4.2e-05 1.034" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_shoulder_pitch_link"/>
+  <axis xyz="1.0 -0.000337 -0.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="right_shoulder_roll_joint" type="revolute">
+  <origin xyz="0.04251 0.029986 3e-06" rpy="0 0 0"/>
+  <parent link="right_shoulder_pitch_link"/>
+  <child link="right_shoulder_roll_link"/>
+  <axis xyz="0.000337 1.0 0.000103"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="right_shoulder_yaw_joint" type="revolute">
+  <origin xyz="-9e-06 -0.027486 -0.134503" rpy="0 0 0"/>
+  <parent link="right_shoulder_roll_link"/>
+  <child link="right_shoulder_yaw_link"/>
+  <axis xyz="0.0 0.000103 -1.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="right_elbow_joint" type="revolute">
+  <origin xyz="0.03 -6e-06 -0.0425" rpy="0 0 0"/>
+  <parent link="right_shoulder_yaw_link"/>
+  <child link="right_elbow_link"/>
+  <axis xyz="-1.0 0.000337 0.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="right_wrist_yaw_joint" type="revolute">
+  <origin xyz="-0.031 2e-05 -0.098" rpy="0 0 0"/>
+  <parent link="right_elbow_link"/>
+  <child link="right_wrist_yaw_link"/>
+  <axis xyz="0.0 -0.000103 1.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="right_wrist_pitch_joint" type="revolute">
+  <origin xyz="1e-05 0.030005 -0.042497" rpy="0 0 0"/>
+  <parent link="right_wrist_yaw_link"/>
+  <child link="right_wrist_pitch_link"/>
+  <axis xyz="-0.000337 -1.0 -0.000103"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+<joint name="right_wrist_roll_joint" type="revolute">
+  <origin xyz="0.02749 -0.028502 -0.073003" rpy="0 0 0"/>
+  <parent link="right_wrist_pitch_link"/>
+  <child link="right_wrist_roll_link"/>
+  <axis xyz="-1.0 0.000337 0.0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="100" velocity="3.14"/>
+</joint>
+
+
+  <link name="left_hand_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://SH_Humanoid_v2_description/meshes/L_hand.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.006 0.0109 -0.104" rpy="0 0 0"/>
+      <geometry><box size="0.099 0.178 0.226"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.8"/>
+      <origin xyz="0.006 0.0109 -0.104"/>
+      <inertia ixx="0.005" iyy="0.004" izz="0.002" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_hand_fixed" type="fixed">
+    <parent link="left_wrist_roll_link"/>
+    <child link="left_hand_link"/>
+    <origin xyz="0.0282 -0.0019 -0.0591" rpy="0 0 0"/>
+  </joint>
+
+  <link name="right_hand_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://SH_Humanoid_v2_description/meshes/R_hand.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.006 -0.0237 -0.0983" rpy="0 0 0"/>
+      <geometry><box size="0.099 0.109 0.215"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.8"/>
+      <origin xyz="-0.006 -0.0237 -0.0983"/>
+      <inertia ixx="0.004" iyy="0.004" izz="0.002" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_hand_fixed" type="fixed">
+    <parent link="right_wrist_roll_link"/>
+    <child link="right_hand_link"/>
+    <origin xyz="-0.0237 -0.0029 -0.0591" rpy="0 0 0"/>
+  </joint>
+
+</robot>

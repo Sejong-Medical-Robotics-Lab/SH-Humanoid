@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: SH_Humanoid_v2_description
+    relative_path: urdf/SH_Humanoid_v2.xacro
+  srdf:
+    relative_path: config/SH_Humanoid_v2.srdf
+  package_settings:
+    author_name: sejong
+    author_email: ehdbs200147@gmail.com
+    generated_timestamp: 1789886745
