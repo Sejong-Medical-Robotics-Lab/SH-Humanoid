@@ -1,0 +1,33 @@
+# sh_gen2_teleop 설정 (팀 약속: 단위 m / rad, 기준 좌표 base_link)
+udp_pose_bridge:
+  ros__parameters:
+    udp_port: 15000          # Unity ControllerPoseLogger의 송신 포트와 일치해야 함
+    frame_id: base_link
+    stale_warn_sec: 1.0
+
+demo_pose_publisher:
+  ros__parameters:
+    frame_id: base_link
+    rate_hz: 20.0
+    # 중립 손 위치 (base_link, m) — SH_Humanoid_v2 URDF 홈 포즈(전관절 0)에서 FK 계산값
+    left_neutral: [-0.1658, 0.0027, 0.5824]
+    right_neutral: [0.1698, 0.0011, 0.5844]
+    amplitude: 0.05
+    period_sec: 6.0
+
+moveit_ik_bridge:
+  ros__parameters:
+    left_group: left_arm       # MoveIt planning group (팀 약속)
+    right_group: right_arm
+    left_ik_link: left_hand_link     # SRDF tip_link (SH_Humanoid_v2 확인 완료)
+    right_ik_link: right_hand_link
+    ik_timeout_sec: 0.05
+    position_only: true          # true면 회전 무시(위치만). 회전 변환 검증 후 false로
+    send_to_controllers: true    # IK 해를 arm_controller로 전송 → RViz 팔이 움직임
+    move_duration_sec: 0.3       # 목표 도달 시간 (작을수록 민첩)
+    left_controller_topic: /left_arm_controller/joint_trajectory
+    right_controller_topic: /right_arm_controller/joint_trajectory
+    left_neutral: [-0.1658, 0.0027, 0.5824]   # 스케일/클램프 기준점
+    right_neutral: [0.1698, 0.0011, 0.5844]
+    delta_scale: 0.7     # 사람 이동량의 70%만 로봇에 반영 (1.0 = 1:1)
+    max_delta: 0.20      # 중립점에서 축당 최대 ±20cm까지만 (작업범위 보호)

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>sh_gen2_teleop</name>
+  <version>0.1.0</version>
+  <description>Meta Quest 3 → Unity → UDP → ROS2 → MoveIt 텔레오퍼레이션 브릿지 (퀘스트 팀)</description>
+  <maintainer email="sejongmrlab2@gmail.com">Sejong MR Lab</maintainer>
+  <license>MIT</license>
+
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>moveit_msgs</depend>
+
+  <test_depend>ament_flake8</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
