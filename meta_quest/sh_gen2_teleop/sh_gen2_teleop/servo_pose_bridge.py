@@ -146,9 +146,20 @@ class ServoPoseBridge(Node):
         self.in_times[side].append(time.monotonic())
         self.cnt_in[side] += 1
 
+    @staticmethod
+    def _qmul(a, b):
+        ax, ay, az, aw = a
+        bx, by, bz, bw = b
+        return [aw*bx + ax*bw + ay*bz - az*by,
+                aw*by - ax*bz + ay*bw + az*bx,
+                aw*bz + ax*by - ay*bx + az*bw,
+                aw*bw - ax*bx - ay*by - az*bz]
+
     def _target_quat(self, side, ctrl_quat):
         if self.ori_mode == 'controller':
-            return ctrl_quat
+            # 컨트롤러 회전은 보정 시점 대비 '변화량'이므로
+            # 준비 자세 손 방향에 곱해서 절대 목표 방향을 만든다.
+            return self._qmul(self.neutral_quat[side], ctrl_quat)
         if self.ori_mode == 'hold_current':
             try:
                 t = self.tf_buffer.lookup_transform(self.frame, self.ee[side], Time())
