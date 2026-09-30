@@ -10,8 +10,8 @@ demo_pose_publisher:
     frame_id: base_link
     rate_hz: 20.0
     # 중립 손 위치 (base_link, m) — SH_Humanoid_v2 URDF 홈 포즈(전관절 0)에서 FK 계산값
-    left_neutral: [-0.166, 0.109, 0.604]
-    right_neutral: [0.170, 0.107, 0.605]
+    left_neutral: [-0.2048, 0.2531, 0.7589]
+    right_neutral: [0.2088, 0.2495, 0.7595]
     amplitude: 0.05
     period_sec: 6.0
 
@@ -27,15 +27,15 @@ moveit_ik_bridge:
     move_duration_sec: 0.3       # 목표 도달 시간 (작을수록 민첩)
     left_controller_topic: /left_arm_controller/joint_trajectory
     right_controller_topic: /right_arm_controller/joint_trajectory
-    left_neutral: [-0.166, 0.109, 0.604]   # 스케일/클램프 기준점
-    right_neutral: [0.170, 0.107, 0.605]
-    left_neutral_quat: [0.199, 0.0, 0.0, 0.980]    # 준비 자세(팔꿈치 -0.4) 손 방향
-    right_neutral_quat: [0.199, 0.0, 0.0, 0.980]
+    left_neutral: [-0.2048, 0.2531, 0.7589]   # 스케일/클램프 기준점
+    right_neutral: [0.2088, 0.2495, 0.7595]
+    left_neutral_quat: [0.5583, 0.1231, 0.0844, 0.8161]    # 준비 자세(팔꿈치 -0.4) 손 방향
+    right_neutral_quat: [0.5583, -0.1235, -0.0844, 0.8161]
     delta_scale: 1.0     # 사람 이동량 1:1 반영
     max_delta: 1.0       # 박스 제한 사실상 해제 (팔 길이 구 제한이 대신함)
     left_shoulder_link: left_shoulder_pitch_link
     right_shoulder_link: right_shoulder_pitch_link
-    left_reach: 0.547
-    right_reach: 0.543
-    reach_ratio: 0.82      # 팔 길이의 88%까지만 (완전히 펴짐 = 특이점 회피)
+    left_reach: 0.453
+    right_reach: 0.452
+    reach_ratio: 0.90      # 실측 직선 도달거리(0.453) 기준 90% = 0.408 m
     orientation_mode: fixed      # hold_current | fixed | controller
