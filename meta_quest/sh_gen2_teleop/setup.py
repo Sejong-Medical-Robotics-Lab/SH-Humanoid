@@ -1,3 +1,4 @@
+from glob import glob
 from setuptools import setup
 
 package_name = 'sh_gen2_teleop'
@@ -10,8 +11,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/quest_ik_demo.launch.py']),
-        ('share/' + package_name + '/config', ['config/quest_ik.yaml']),
+        ('share/' + package_name + '/launch', glob('launch/*.launch.py')),
+        ('share/' + package_name + '/config', glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,6 +25,7 @@ setup(
             'udp_pose_bridge = sh_gen2_teleop.udp_pose_bridge:main',
             'demo_pose_publisher = sh_gen2_teleop.demo_pose_publisher:main',
             'moveit_ik_bridge = sh_gen2_teleop.moveit_ik_bridge:main',
+            'servo_pose_bridge = sh_gen2_teleop.servo_pose_bridge:main',
         ],
     },
 )

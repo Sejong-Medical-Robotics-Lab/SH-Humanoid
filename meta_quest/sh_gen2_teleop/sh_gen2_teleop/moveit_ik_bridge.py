@@ -66,7 +66,7 @@ class MoveItIkBridge(Node):
         self.declare_parameter('left_neutral', [-0.1658, 0.0027, 0.5824])
         self.declare_parameter('right_neutral', [0.1698, 0.0011, 0.5844])
         # 사람 이동량 → 로봇 이동량 배율 (1.0 = 1:1)
-        self.declare_parameter('delta_scale', 0.7)
+        self.declare_parameter('delta_scale', 1.0)
         # 중립점에서 각 축으로 허용하는 최대 이동량(m) — 작업범위 밖 목표 차단
         self.declare_parameter('max_delta', 0.20)
 
