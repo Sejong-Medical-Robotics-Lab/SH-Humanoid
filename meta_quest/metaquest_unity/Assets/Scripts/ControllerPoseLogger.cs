@@ -1,4 +1,5 @@
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 using System;
 using System.Globalization;
 using System.Net.Sockets;
@@ -26,13 +27,15 @@ public class ControllerPoseLogger : MonoBehaviour
     public KeyCode calibrateKey = KeyCode.C;
 
     [Header("Robot neutral hand poses (base_link, metres)")]
-    public Vector3 leftNeutralPosition = new Vector3(-0.166f, 0.003f, 0.582f);
-    public Vector3 rightNeutralPosition = new Vector3(0.166f, 0.003f, 0.584f);
+    public Vector3 leftNeutralPosition = new Vector3(-0.2048f, 0.2531f, 0.7589f);
+    public Vector3 rightNeutralPosition = new Vector3(0.2088f, 0.2495f, 0.7595f);
 
     private float timer;
     private float sendTimer;
     private bool hasWarnedAboutMissingReferences;
     private bool calibrated;
+    private bool leftHeld;
+    private bool rightHeld;
     private Vector3 leftCalibrationPosition;
     private Vector3 rightCalibrationPosition;
     private Quaternion leftCalibrationRotation;
@@ -67,19 +70,29 @@ public class ControllerPoseLogger : MonoBehaviour
             return;
         }
 
-        if (Keyboard.current != null && Keyboard.current.cKey.wasPressedThisFrame)
-        {
-            CalibrateNeutralPose();
-        }
+        // 클러치: 그립 버튼을 누르는 동안만 추종. 누르는 순간 자동 보정.
+        bool lNow = ReadGrip(XRNode.LeftHand);
+        bool rNow = ReadGrip(XRNode.RightHand);
+
+        if (lNow && !leftHeld) CalibrateSide(true);
+        if (rNow && !rightHeld) CalibrateSide(false);
+        leftHeld = lNow;
+        rightHeld = rNow;
 
         sendTimer += Time.deltaTime;
-        if (sendUdp && calibrated && sendTimer >= sendInterval)
+        if (sendUdp && sendTimer >= sendInterval)
         {
             sendTimer = 0f;
-            SendControllerPose("L", leftController, leftCalibrationPosition,
-                leftCalibrationRotation, leftNeutralPosition);
-            SendControllerPose("R", rightController, rightCalibrationPosition,
-                rightCalibrationRotation, rightNeutralPosition);
+            if (leftHeld)
+            {
+                SendControllerPose("L", leftController, leftCalibrationPosition,
+                    leftCalibrationRotation, leftNeutralPosition);
+            }
+            if (rightHeld)
+            {
+                SendControllerPose("R", rightController, rightCalibrationPosition,
+                    rightCalibrationRotation, rightNeutralPosition);
+            }
         }
 
         timer += Time.deltaTime;
@@ -91,6 +104,40 @@ public class ControllerPoseLogger : MonoBehaviour
         timer = 0f;
         LogControllerPose("LEFT", leftController);
         LogControllerPose("RIGHT", rightController);
+    }
+
+    private static bool ReadGrip(XRNode node)
+    {
+        var devices = new System.Collections.Generic.List<UnityEngine.XR.InputDevice>();
+        var side = node == XRNode.LeftHand
+            ? UnityEngine.XR.InputDeviceCharacteristics.Left
+            : UnityEngine.XR.InputDeviceCharacteristics.Right;
+        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(
+            UnityEngine.XR.InputDeviceCharacteristics.HeldInHand | side, devices);
+
+        foreach (var d in devices)
+        {
+            if (d.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out bool gb) && gb) return true;
+            if (d.TryGetFeatureValue(UnityEngine.XR.CommonUsages.grip, out float g) && g > 0.5f) return true;
+            if (d.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out bool tb) && tb) return true;
+        }
+        return false;
+    }
+
+    private void CalibrateSide(bool left)
+    {
+        if (left)
+        {
+            leftCalibrationPosition = trackingSpace.InverseTransformPoint(leftController.position);
+            leftCalibrationRotation = Quaternion.Inverse(trackingSpace.rotation) * leftController.rotation;
+        }
+        else
+        {
+            rightCalibrationPosition = trackingSpace.InverseTransformPoint(rightController.position);
+            rightCalibrationRotation = Quaternion.Inverse(trackingSpace.rotation) * rightController.rotation;
+        }
+        calibrated = true;
+        Debug.Log($"[CTRL_POSE] 클러치 ON ({(left ? "L" : "R")})", this);
     }
 
     private void CalibrateNeutralPose()
@@ -168,7 +215,7 @@ public class ControllerPoseLogger : MonoBehaviour
             $"RotationQuaternion={FormatQuaternion(unityRotation)} " +
             $"RotationEuler={unityRotation.eulerAngles:F1} | " +
             $"RobotBaseLink PositionCandidate={robotPosition:F3} " +
-            "(VERIFY signs and rotation with real Quest)", this);
+            $"| Clutch L={leftHeld} R={rightHeld}", this);
     }
 
     private static string FormatQuaternion(Quaternion rotation)
