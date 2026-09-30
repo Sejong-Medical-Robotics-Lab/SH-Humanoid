@@ -29,8 +29,8 @@ smoothing_filter_plugin_name: online_signal_smoothing::ButterworthFilterPlugin
 is_primary_planning_scene_monitor: false
 monitored_planning_scene_topic: /monitored_planning_scene
 
-lower_singularity_threshold: 200.0
-hard_stop_singularity_threshold: 500.0
+lower_singularity_threshold: 60.0    # 이 팔(45cm) 작업영역 75퍼센타일 기준
+hard_stop_singularity_threshold: 200.0  # 99퍼센타일 기준
 leaving_singularity_threshold_multiplier: 2.0
 joint_limit_margins: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 
