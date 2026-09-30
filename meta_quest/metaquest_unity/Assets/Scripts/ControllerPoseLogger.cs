@@ -22,7 +22,7 @@ public class ControllerPoseLogger : MonoBehaviour
     public bool sendUdp = true;
     public string ros2ComputerAddress = "127.0.0.1";
     [Range(1024, 65535)] public int ros2UdpPort = 15000;
-    [Min(0.02f)] public float sendInterval = 0.05f;
+    [Min(0.0f)] public float sendInterval = 0.0f;
     public KeyCode calibrateKey = KeyCode.C;
 
     [Header("Robot neutral hand poses (base_link, metres)")]
@@ -42,7 +42,7 @@ public class ControllerPoseLogger : MonoBehaviour
     private void OnValidate()
     {
         logInterval = Mathf.Max(0.02f, logInterval);
-        sendInterval = Mathf.Max(0.02f, sendInterval);
+        sendInterval = Mathf.Max(0.0f, sendInterval);
     }
 
     private void OnEnable()
@@ -72,6 +72,16 @@ public class ControllerPoseLogger : MonoBehaviour
             CalibrateNeutralPose();
         }
 
+        sendTimer += Time.deltaTime;
+        if (sendUdp && calibrated && sendTimer >= sendInterval)
+        {
+            sendTimer = 0f;
+            SendControllerPose("L", leftController, leftCalibrationPosition,
+                leftCalibrationRotation, leftNeutralPosition);
+            SendControllerPose("R", rightController, rightCalibrationPosition,
+                rightCalibrationRotation, rightNeutralPosition);
+        }
+
         timer += Time.deltaTime;
         if (timer < logInterval)
         {
@@ -81,16 +91,6 @@ public class ControllerPoseLogger : MonoBehaviour
         timer = 0f;
         LogControllerPose("LEFT", leftController);
         LogControllerPose("RIGHT", rightController);
-
-        sendTimer += logInterval;
-        if (sendUdp && calibrated && sendTimer >= sendInterval)
-        {
-            sendTimer = 0f;
-            SendControllerPose("L", leftController, leftCalibrationPosition,
-                leftCalibrationRotation, leftNeutralPosition);
-            SendControllerPose("R", rightController, rightCalibrationPosition,
-                rightCalibrationRotation, rightNeutralPosition);
-        }
     }
 
     private void CalibrateNeutralPose()
