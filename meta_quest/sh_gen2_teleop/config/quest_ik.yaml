@@ -9,9 +9,9 @@ demo_pose_publisher:
   ros__parameters:
     frame_id: base_link
     rate_hz: 20.0
-    # 중립 손 위치 (base_link, m) — SH_Humanoid_v2 URDF 홈 포즈(전관절 0)에서 FK 계산값
-    left_neutral: [-0.2048, 0.2531, 0.7589]
-    right_neutral: [0.2088, 0.2495, 0.7595]
+    # 준비 자세(teleop_ready) 손 위치 (base_link, m) — FK 계산값
+    left_neutral: [-0.166, 0.109, 0.604]
+    right_neutral: [0.170, 0.107, 0.605]
     amplitude: 0.05
     period_sec: 6.0
 
@@ -27,15 +27,25 @@ moveit_ik_bridge:
     move_duration_sec: 0.3       # 목표 도달 시간 (작을수록 민첩)
     left_controller_topic: /left_arm_controller/joint_trajectory
     right_controller_topic: /right_arm_controller/joint_trajectory
-    left_neutral: [-0.2048, 0.2531, 0.7589]   # 스케일/클램프 기준점
-    right_neutral: [0.2088, 0.2495, 0.7595]
-    left_neutral_quat: [0.5583, 0.1231, 0.0844, 0.8161]    # 준비 자세(팔꿈치 -0.4) 손 방향
-    right_neutral_quat: [0.5583, -0.1235, -0.0844, 0.8161]
-    delta_scale: 0.7    # 로봇 팔 45cm, 허용반경 41cm / 사람 팔 약 60cm
+    left_neutral: [-0.166, 0.109, 0.604]   # 스케일/클램프 기준점
+    right_neutral: [0.170, 0.107, 0.605]
+    left_neutral_quat: [0.199, 0.0, 0.0, 0.980]
+    right_neutral_quat: [0.199, 0.0, 0.0, 0.980]
+    delta_scale: 0.85       # 0.7이면 사람이 팔을 펴도 로봇이 덜 감
     max_delta: 1.0       # 박스 제한 사실상 해제 (팔 길이 구 제한이 대신함)
     left_shoulder_link: left_shoulder_pitch_link
     right_shoulder_link: right_shoulder_pitch_link
-    left_reach: 0.453
-    right_reach: 0.452
-    reach_ratio: 0.90      # 실측 직선 도달거리(0.453) 기준 90% = 0.408 m
+    left_reach: 0.547
+    right_reach: 0.543
+    reach_ratio: 0.98       # pink는 특이점에서 안 멈춰서 거의 끝까지
     orientation_mode: controller      # hold_current | fixed | controller
+    input_mode: absolute       # relative로 바꾸면 기존 방식
+    human_arm_length: 0.62     # 본인 어깨~손목 길이(m)로 맞추면 더 정확
+    orientation_cost: 0.6
+    posture_weights: [0.1, 1.0, 1.0, 0.3, 0.1, 0.1, 0.1]
+    # --- pink IK (pink_teleop.launch.py에서만 사용) ---
+    posture_cost: 0.02         # 준비 자세로 끌어당기는 세기 (클수록 자세 고집, 위치 정확도 약간 감소)
+    damping: 0.0001            # 특이점 근처 안정화
+    limit_margin: 0.05         # URDF limit 안쪽 여유 (rad)
+    midline_margin: 0.10   # 좌우 팔이 몸 중심선을 넘지 않게
+    keepout_radius: 0.15   # 기둥 주변 금지 반경
