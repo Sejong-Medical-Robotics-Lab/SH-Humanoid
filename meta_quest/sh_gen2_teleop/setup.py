@@ -26,6 +26,7 @@ setup(
             'demo_pose_publisher = sh_gen2_teleop.demo_pose_publisher:main',
             'moveit_ik_bridge = sh_gen2_teleop.moveit_ik_bridge:main',
             'servo_pose_bridge = sh_gen2_teleop.servo_pose_bridge:main',
+            'pink_ik_bridge = sh_gen2_teleop.pink_ik_bridge:main',
         ],
     },
 )
