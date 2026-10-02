@@ -9,9 +9,9 @@ demo_pose_publisher:
   ros__parameters:
     frame_id: base_link
     rate_hz: 20.0
-    # 준비 자세(teleop_ready) 손 위치 (base_link, m) — FK 계산값
-    left_neutral: [-0.166, 0.109, 0.604]
-    right_neutral: [0.170, 0.107, 0.605]
+    # 준비 자세(teleop_ready, 팔꿈치 -1.2) 손 위치 (base_link, m) — tf2_echo 실측
+    left_neutral: [-0.2048, 0.2531, 0.7589]
+    right_neutral: [0.2088, 0.2495, 0.7595]
     amplitude: 0.05
     period_sec: 6.0
 
@@ -27,8 +27,8 @@ moveit_ik_bridge:
     move_duration_sec: 0.3       # 목표 도달 시간 (작을수록 민첩)
     left_controller_topic: /left_arm_controller/joint_trajectory
     right_controller_topic: /right_arm_controller/joint_trajectory
-    left_neutral: [-0.166, 0.109, 0.604]   # 스케일/클램프 기준점
-    right_neutral: [0.170, 0.107, 0.605]
+    left_neutral: [-0.2048, 0.2531, 0.7589]   # 스케일/클램프 기준점
+    right_neutral: [0.2088, 0.2495, 0.7595]
     left_neutral_quat: [0.199, 0.0, 0.0, 0.980]
     right_neutral_quat: [0.199, 0.0, 0.0, 0.980]
     delta_scale: 0.85       # 0.7이면 사람이 팔을 펴도 로봇이 덜 감
